@@ -24,8 +24,17 @@ import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
-/* arrow function stored in this emailReducer const for the useReducer() function below. */
-const emailReducer = () => {};
+/* arrow function stored in this emailReducer const for the useReducer() function below. Please 
+note -> reducer function created outside of the component function. Did so, because inside of this 
+reducer function, we won't need any data thats generated inside of the component function. */
+/* Other words -> this reducer funcrtion can be created outside of the scope of the this 
+component function -> does need to interact with anything defined inside of the componetn function. */
+
+//PURPOSE OF FUNCTION OUTLINED
+/* All the data which will be required and used inside of the reducer function will be passed into this
+function when its executed by React, automatically */
+/* reducer function recieves two arguments, our last state snapshot and the action that was dispatched. */
+const emailReducer = (state, action) => {};
 
 const Login = (props) => {
   /* could use useReducer() to combine our entered values and validities for the email and the password. 

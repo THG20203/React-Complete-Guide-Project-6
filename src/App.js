@@ -39,3 +39,11 @@ function App() {
 }
 
 export default App;
+
+//useReducer - basic structure:
+/* const [state, dispatchFn] = useReducer(reducerFn, intialState, initFn) */
+// Explanation of function above:
+/* state snapshot = used in the component re-render/ re-evaluation cycle */
+/* dispatchFn -> can be used to dispatch a new action (i.e. trigger an an update of the state) */
+/* this first part -> similar as for useState() -> though the state updating function will work
+differently */

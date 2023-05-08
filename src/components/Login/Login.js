@@ -118,6 +118,16 @@ const Login = (props) => {
     };
   }, []);
 
+  /* use object destructuring -> (same as array destructuring just with objects) to pull out certain
+  properties of objects. For example -> from emailState, extract isValid -> store it in a const to the
+  left of the equals sign called emailIsValid */
+  const { isValid: emailIsValid } = emailState;
+  /* can do the same for passwordState() -> again we are creating an alias assignement, this is not a value 
+  assignment -> its an alias assignement because its part of this object destructuring syntax -> which 
+  is the syntax you're automatically using if you're using those curly braces on the left side of the 
+  equals sign. */
+  const { isValid: passwordIsValid } = passwordState;
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       console.log("Checking form validity!");

@@ -18,11 +18,32 @@ const AuthContext = React.createContext({
   /* Why? IDE is looking at this default context object -> find out what you are able to access on your 
   context */
   onLogout: () => {},
+  onLogin: (email, password) => {},
 });
 
 /* we are exporting AuthContextProvider component in addition to the default as a named export */
 export const AuthContextProvider = (props) => {
-  return <AuthContext.Provider>{props.children}</AuthContext.Provider>;
+  /* make auth-context stand alone file -> manages entire login state in AuthContextProvider component */
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const logoutHandler = () => {
+    setIsLoggedIn(false);
+  };
+
+  const loginHandler = () => {
+    setIsLoggedIn(true);
+  };
+  return (
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        onLogout: logoutHandler,
+        onLogin: loginHandler,
+      }}
+    >
+      {props.children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthContext;

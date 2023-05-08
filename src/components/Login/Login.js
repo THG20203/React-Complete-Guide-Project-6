@@ -115,7 +115,7 @@ const Login = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     /* scrolling down to submit handler -> here we want to forward the value -> emailState.value */
-    props.onLogin(enteredEmail, enteredPassword);
+    props.onLogin(emailState.value, enteredPassword);
   };
 
   return (
@@ -123,14 +123,16 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ""
+            /* instead of emailIsValid, we have emailState is valid */
+            emailState.isValid === false ? classes.invalid : ""
           }`}
         >
           <label htmlFor="email">E-Mail</label>
           <input
             type="email"
             id="email"
-            value={enteredEmail}
+            /* below, where I pass the value back into the input, we can have emailState.value */
+            value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />

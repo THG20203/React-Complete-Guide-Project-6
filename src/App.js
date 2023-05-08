@@ -48,7 +48,7 @@ function App() {
     and all their descendent components (so all their children and their childrens children etc.) - all 
     those components will now have access to that context. AuthContext can also become a root level 
     component - remove ReactFragment. */
-    <AuthContext.Provider>
+    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
       {/* EXPLANATION OF PROPS PROBLEM AND THEREFORE THE NEED FOR REACT CONTEXT API */}
       {/* We use the isLoggedIn state in the header, to which I'm passing it through the 
       isAuthenticated prop. From there we are able to logout -> so I passed the pointer at 
@@ -59,7 +59,7 @@ function App() {
       the Navigation component. So -> in MainHeader I'm recieving props, (data through props) 
       which I'm not actually using primarily in the main header, instead, I just forward that data. */}
       {/* Bigger apps -> chains might get longer and longer */}
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <MainHeader onLogout={logoutHandler} />
       <main>
         {/* Also need to the login state to render different content here -> either the login 
         or the home component, and to those components */}

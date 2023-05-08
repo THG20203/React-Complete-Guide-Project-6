@@ -1,22 +1,30 @@
-import React from "react";
-
+/* useContext hook -> allows us to use the Context -> tap into a context and listen to it */
+import React, { useContext } from "react";
+import AuthContext from "../store/auth-context";
 import classes from "./Navigation.module.css";
 
 const Navigation = (props) => {
+  /* Using the useContext hook is simple -> call useContext in your React component function,
+  and pass the context -> a pointer at the context you want to use to it. So in my case, I'm pointing
+  towards AuthContext. */
+  /* what I get back (on the left hand sided again) is the context value -> ctx - so can use to replace
+  the props code in the JSX below in this navigation file. */
+  const ctx = useContext(AuthContext);
+
   return (
     <nav className={classes.nav}>
       <ul>
-        {props.isLoggedIn && (
+        {ctx.isLoggedIn && (
           <li>
             <a href="/">Users</a>
           </li>
         )}
-        {props.isLoggedIn && (
+        {ctx.isLoggedIn && (
           <li>
             <a href="/">Admin</a>
           </li>
         )}
-        {props.isLoggedIn && (
+        {ctx.isLoggedIn && (
           <li>
             <button onClick={props.onLogout}>Logout</button>
           </li>

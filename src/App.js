@@ -39,32 +39,34 @@ function App() {
   };
 
   return (
-    <React.Fragment>
-      {/* EXPLANATION OF REACT CONTEXT STATE USAGE */}
-      {/* We can wrap our main header and the main section -> main html element with Auth-Context */}
-      {/* AuthContext itself -> not a component -> in JSX we need a component though. But with a . a dot
-      we can access a property on this Auth-Context object that contains a component and thats the 
-      '.Provider' */}
-      <AuthContext.Provider>
-        {/* EXPLANATION OF PROPS PROBLEM AND THEREFORE THE NEED FOR REACT CONTEXT API */}
-        {/* We use the isLoggedIn state in the header, to which I'm passing it through the 
+    /* EXPLANATION OF REACT CONTEXT STATE USAGE */
+    /* We can wrap our main header and the main section -> main html element with Auth-Context */
+    /* AuthContext itself -> not a component -> in JSX we need a component though. But with a . a dot
+    we can access a property on this Auth-Context object that contains a component and thats the 
+    '.Provider' */
+    /* Now AuthContext is wrapped around these components, all these components <MainHeader> and <main>
+    and all their descendent components (so all their children and their childrens children etc.) - all 
+    those components will now have access to that context. AuthContext can also become a root level 
+    component - remove ReactFragment. */
+    <AuthContext.Provider>
+      {/* EXPLANATION OF PROPS PROBLEM AND THEREFORE THE NEED FOR REACT CONTEXT API */}
+      {/* We use the isLoggedIn state in the header, to which I'm passing it through the 
       isAuthenticated prop. From there we are able to logout -> so I passed the pointer at 
       the logoutHandler to my header on the onLogout prop. */}
-        {/* here, we're passing isLoggedIn through the isAuthenticated prop to the MainHeader.
+      {/* here, we're passing isLoggedIn through the isAuthenticated prop to the MainHeader.
       Passing the logout handler through the onLogout prop to the main header as well. */}
-        {/* This isn't even being utilised in the MainHeader component though, its being used in 
+      {/* This isn't even being utilised in the MainHeader component though, its being used in 
       the Navigation component. So -> in MainHeader I'm recieving props, (data through props) 
       which I'm not actually using primarily in the main header, instead, I just forward that data. */}
-        {/* Bigger apps -> chains might get longer and longer */}
-        <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
-        <main>
-          {/* Also need to the login state to render different content here -> either the login 
+      {/* Bigger apps -> chains might get longer and longer */}
+      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+      <main>
+        {/* Also need to the login state to render different content here -> either the login 
         or the home component, and to those components */}
-          {!isLoggedIn && <Login onLogin={loginHandler} />}
-          {isLoggedIn && <Home onLogout={logoutHandler} />}
-        </main>
-      </AuthContext.Provider>
-    </React.Fragment>
+        {!isLoggedIn && <Login onLogin={loginHandler} />}
+        {isLoggedIn && <Home onLogout={logoutHandler} />}
+      </main>
+    </AuthContext.Provider>
   );
 }
 

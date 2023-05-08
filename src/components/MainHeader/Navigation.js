@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import AuthContext from "../store/auth-context";
 import classes from "./Navigation.module.css";
 
-const Navigation = (props) => {
+const Navigation = () => {
   /* Using the useContext hook is simple -> call useContext in your React component function,
   and pass the context -> a pointer at the context you want to use to it. So in my case, I'm pointing
   towards AuthContext. */
@@ -26,7 +26,9 @@ const Navigation = (props) => {
         )}
         {ctx.isLoggedIn && (
           <li>
-            <button onClick={props.onLogout}>Logout</button>
+            {/* replacing props.onLogout with ctx.onLogout -> this will work because on the context 
+            object */}
+            <button onClick={ctx.onLogout}>Logout</button>
           </li>
         )}
       </ul>

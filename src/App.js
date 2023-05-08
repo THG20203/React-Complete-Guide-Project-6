@@ -48,7 +48,16 @@ function App() {
     and all their descendent components (so all their children and their childrens children etc.) - all 
     those components will now have access to that context. AuthContext can also become a root level 
     component - remove ReactFragment. */
-    <AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
+
+    //MAKING CONTENT DYNAMIC
+    /* We can set up dynamic context -> don't just pass data to our components but also functions. On 
+    AuthContext provider as well as passing down isLoggedIn, pass down onLogout -> can point at 
+    the logoutHandler */
+    /* If I do that, every listening component -> every component that listens to Auth context will be 
+    able to utilise logoutHandler simply through the onLogout context value. */
+    <AuthContext.Provider
+      value={{ isLoggedIn: isLoggedIn, onLogout: logoutHandler }}
+    >
       {/* EXPLANATION OF PROPS PROBLEM AND THEREFORE THE NEED FOR REACT CONTEXT API */}
       {/* We use the isLoggedIn state in the header, to which I'm passing it through the 
       isAuthenticated prop. From there we are able to logout -> so I passed the pointer at 
@@ -56,13 +65,16 @@ function App() {
       {/* here, we're passing isLoggedIn through the isAuthenticated prop to the MainHeader.
       Passing the logout handler through the onLogout prop to the main header as well. */}
       {/* This isn't even being utilised in the MainHeader component though, its being used in 
-      the Navigation component. So -> in MainHeader I'm recieving props, (data through props) 
+      the Navigation component. So -> in MainHeader I was recieving props, (data through props) 
       which I'm not actually using primarily in the main header, instead, I just forward that data. */}
       {/* Bigger apps -> chains might get longer and longer */}
-      <MainHeader onLogout={logoutHandler} />
+      <MainHeader />
       <main>
         {/* Also need to the login state to render different content here -> either the login 
         or the home component, and to those components */}
+        {/* Here in the main section, I will still pass down the logoutHandler through onLogout 
+        and the loginHandler through onLogin because I directly use those handlers in the Login and 
+        Home components. */}
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>

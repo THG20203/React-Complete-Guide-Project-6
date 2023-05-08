@@ -103,8 +103,12 @@ const Login = (props) => {
     }
   );
 
-  /* need to call useReducer again */
-  useReducer();
+  /* need to call useReducer again for the password reducer. What we get back is the password state and the 
+  dispatchPassword function.  */
+  const [passwordState, dispatchPassword] = useReducer(passwordReducer, {
+    value: "",
+    isValid: null,
+  });
 
   useEffect(() => {
     console.log("EFFECT RUNNING");
@@ -140,13 +144,14 @@ const Login = (props) => {
     payload, in this case the value users entered. */
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
-    setFormIsValid(
-      event.target.value.includes("@") && enteredPassword.trim().length > 6
-    );
+    /* now we just need to update the code accordingly */
+    setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {
-    setEnteredPassword(event.target.value);
+    /* When the password changes -> call dispatch password, pass an object -> type of USER_INPUT and 
+    use the val field */
+    dispatchPassword({ type: "USER_INPUT", val: event.target.vlue });
 
     setFormIsValid(
       /* Can use emailState here where I want the enteredEmail -> now can just 

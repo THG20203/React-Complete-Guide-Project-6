@@ -88,7 +88,16 @@ const Login = (props) => {
   // }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
-    /* want to update the email -> so lets start here with the value */
+    /* want to update the email -> so lets start here with the value, call dispatch Email,
+    and pass to it a so-called action. Totally up to me what that action is -> could be a 
+    string identifier, but often an object which has some field that holds some identifier, often 
+    the field is then named type. i.e. could be USER_INPUT (convention is all caps) */
+    /* then can add an extra payload to this action -> I can but its up to me. Since we want to 
+    save what the user entered, it would make sense to add some payload -> i.e. a val field -> holds
+    event target value. */
+    /* So now entire object is our action -> its a type field that describes what happened and extra
+    payload in this case. */
+    dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
     setFormIsValid(
       event.target.value.includes("@") && enteredPassword.trim().length > 6

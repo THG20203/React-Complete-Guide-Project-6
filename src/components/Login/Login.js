@@ -51,9 +51,21 @@ const emailReducer = (state, action) => {
     I recieved a user input action. */
     return { value: action.val, isValid: action.val.includes("@") };
   }
+  /* if statement check added for input blur */
+  if (action.type === "INPUT_BLUR") {
+    /* value should be value I had before -> don't want to reset it to empty cause the input could blur after
+    the user entered something. So use last state snapshot I had here -> this is guarenteed to be the absolute
+    last state snapshot -> React gives us the last state snapshot, makes sure its the latest one. */
+    /* so on this basis, can write state.value -> write last value entered for the email */
+    /* For validity -> if the state.value is valid -> adding validity check on the end (includes(@)) */
+    return { value: state.value, isValid: state.value.includes("@") };
+  }
   /* For any other action that might reach this reducer, the default state below will be returned. */
   return { value: "", isValid: false };
 };
+
+/* passwordReducer is an anonymous function, gets the last state and the action */
+const passwordReducer = (state, action) => {};
 
 const Login = (props) => {
   /* could use useReducer() to combine our entered values and validities for the email and the password. 

@@ -42,10 +42,17 @@ const emailReducer = (state, action) => {
   /* The object from the dsipatchEmail function further down in code has type field, so I can check for 
   action.type and check if the values stored in that type field is that string with the content 
   user input. */
-  if (action.type === "USER_INPUT")
+  if (action.type === "USER_INPUT") {
     /* want to return a state snapshot for my email, wqhere the value is action.val. Thats the payload we 
     appended to our action. */
-    return { value: action.val, isValid: false };
+    /* Maybe we also want to update the validity here, if we're already added. action.val.includes("@") for
+    this very trivial validation. */
+    /* so now with object below in the return statement, I'm updating both the value and isValid whenever 
+    I recieved a user input action. */
+    return { value: action.val, isValid: action.val.includes("@") };
+  }
+  /* For any other action that might reach this reducer, the default state below will be returned. */
+  return { value: "", isValid: false };
 };
 
 const Login = (props) => {

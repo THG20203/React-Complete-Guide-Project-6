@@ -63,7 +63,6 @@ const Login = (props) => {
       value: "",
       isValid: false,
     }
-    /* we need to dispatch an action -> next part of the useReducer code */
   );
 
   useEffect(() => {
@@ -89,7 +88,7 @@ const Login = (props) => {
   // }, [enteredEmail, enteredPassword]);
 
   const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+    /* want to update the email -> so lets start here with the value */
 
     setFormIsValid(
       event.target.value.includes("@") && enteredPassword.trim().length > 6
@@ -107,6 +106,7 @@ const Login = (props) => {
   };
 
   const validateEmailHandler = () => {
+    /* here, we want to update the validity */
     setEmailIsValid(emailState.isValid);
   };
 

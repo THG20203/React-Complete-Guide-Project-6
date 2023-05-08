@@ -67,10 +67,12 @@ const emailReducer = (state, action) => {
 /* passwordReducer is an anonymous function, gets the last state and the action */
 const passwordReducer = (state, action) => {
   if (action.type === "USER_INPUT") {
-    return { value: action.val, isValid: action.val.includes("@") };
+    /* validation code needs to change from above -> looking at password length for passwordReducer function. */
+    return { value: action.val, isValid: action.val.trim().length > 6 };
   }
   if (action.type === "INPUT_BLUR") {
-    return { value: state.value, isValid: state.value.includes("@") };
+    /* validation code needs to change from above -> looking at password length for passwordReducer function. */
+    return { value: state.value, isValid: state.value.trim().length > 6 };
   }
   return { value: "", isValid: false };
 };
@@ -97,9 +99,12 @@ const Login = (props) => {
     now use in our code. */
     {
       value: "",
-      isValid: false,
+      isValid: null,
     }
   );
+
+  /* need to call useReducer again */
+  useReducer();
 
   useEffect(() => {
     console.log("EFFECT RUNNING");

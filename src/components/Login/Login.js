@@ -42,8 +42,9 @@ const emailReducer = (state, action) => {
 const Login = (props) => {
   /* could use useReducer() to combine our entered values and validities for the email and the password. 
   Goal is to combine the value and the validity into one state managed by useReducer. */
-  const [enteredEmail, setEnteredEmail] = useState("");
-  const [emailIsValid, setEmailIsValid] = useState();
+  /* removing enteredEmail and email isValid useState calls here because useReducer has replaced them */
+  // const [enteredEmail, setEnteredEmail] = useState("");
+  // const [emailIsValid, setEmailIsValid] = useState();
   const [enteredPassword, setEnteredPassword] = useState("");
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
@@ -62,6 +63,7 @@ const Login = (props) => {
       value: "",
       isValid: false,
     }
+    /* we need to dispatch an action -> next part of the useReducer code */
   );
 
   useEffect(() => {

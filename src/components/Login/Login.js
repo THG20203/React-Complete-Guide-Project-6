@@ -150,8 +150,8 @@ const Login = (props) => {
 
   const passwordChangeHandler = (event) => {
     /* When the password changes -> call dispatch password, pass an object -> type of USER_INPUT and 
-    use the val field */
-    dispatchPassword({ type: "USER_INPUT", val: event.target.vlue });
+    use the val field -> which is the event.target.value */
+    dispatchPassword({ type: "USER_INPUT", val: event.target.value });
 
     setFormIsValid(
       /* Can use emailState here where I want the enteredEmail -> now can just 

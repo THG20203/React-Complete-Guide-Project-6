@@ -83,8 +83,8 @@ const Login = (props) => {
   /* removing enteredEmail and email isValid useState calls here because useReducer has replaced them */
   // const [enteredEmail, setEnteredEmail] = useState("");
   // const [emailIsValid, setEmailIsValid] = useState();
-  const [enteredPassword, setEnteredPassword] = useState("");
-  const [passwordIsValid, setPasswordIsValid] = useState();
+  // const [enteredPassword, setEnteredPassword] = useState("");
+  // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
   /* Calling useReducer() function. useReducer return an array with exactly two elements, and we can

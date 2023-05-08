@@ -131,8 +131,16 @@ const Login = (props) => {
   };
 
   const validateEmailHandler = () => {
-    /* here, we want to update the validity */
-    setEmailIsValid(emailState.isValid);
+    /* here, we want to update the validity. We use dispatchEmail -> pass in an oject -> should be 
+    consistent, my actions should always have the same structure -> so my code where I try and
+    access type property in the emailReducer if statement doesn't suddenly fail. */
+    /* On this basis of consistency therefore, so again, dispatching an object with a type field,
+    here for example its INPUT_BLUR, because the input lost focus, it was blurred. Don't really 
+    need to add a second part to the object, a value after type -> because all we care about 
+    is that the input lost focus, there is no extra data that needs to be added. */
+    /* doesn't matter, cause the if statement in emailReducer function above only runs if the 
+    action type is USER_INPUT -> not for INPUT_BLUR */
+    dispatchEmail({ type: "INPUT_BLUR" });
   };
 
   const validatePasswordHandler = () => {

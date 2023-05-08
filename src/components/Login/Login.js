@@ -36,11 +36,16 @@ function when its executed by React, automatically */
 /* reducer function recieves two arguments, our last state snapshot and the action that was dispatched. */
 const emailReducer = (state, action) => {
   /* Now can handle action with an if statement. Check if action.type is equal to user input */
+
   /* Keep in mind, what I dispatched as an action will be an object, because thats what we set it to in 
   the dispatchEmail function. */
+  /* The object from the dsipatchEmail function further down in code has type field, so I can check for 
+  action.type and check if the values stored in that type field is that string with the content 
+  user input. */
   if (action.type === "USER_INPUT")
-    /* should return a new state */
-    return { value: "", isValid: false };
+    /* want to return a state snapshot for my email, wqhere the value is action.val. Thats the payload we 
+    appended to our action. */
+    return { value: action.val, isValid: false };
 };
 
 const Login = (props) => {

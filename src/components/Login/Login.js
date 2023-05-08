@@ -65,7 +65,15 @@ const emailReducer = (state, action) => {
 };
 
 /* passwordReducer is an anonymous function, gets the last state and the action */
-const passwordReducer = (state, action) => {};
+const passwordReducer = (state, action) => {
+  if (action.type === "USER_INPUT") {
+    return { value: action.val, isValid: action.val.includes("@") };
+  }
+  if (action.type === "INPUT_BLUR") {
+    return { value: state.value, isValid: state.value.includes("@") };
+  }
+  return { value: "", isValid: false };
+};
 
 const Login = (props) => {
   /* could use useReducer() to combine our entered values and validities for the email and the password. 

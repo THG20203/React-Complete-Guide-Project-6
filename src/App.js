@@ -10,6 +10,11 @@ function App() {
   is our 'isLoggedIn' state and the login functions. */
   /* We're managing this state in the app component, because I lifted this state up to that component.
   We need this isLoggedIn state and the functions to change it everywhere in this application. */
+
+  //REACT CONTEXT EXPLANATION:
+  /* React context -> component-wide, behind the scenes state storage. This allows us to trigger an 
+  action in that component wide state storage, then directly pass that to the component that is interested
+  without building such long prop chains. */
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {

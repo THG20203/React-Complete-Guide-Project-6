@@ -134,14 +134,14 @@ const Login = (props) => {
       /* this below that we've altered would be a fine way pf calling setFormIsValid, because since 
       its now of an effect we still refer to our state snapshots, but this effect is guaranteed to rerun
       whenever these states change, ultimately it will run with latest state values. */
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(emailIsValid && passwordIsValid);
     }, 500);
 
     return () => {
       console.log("CLEANUP");
       clearTimeout(identifier);
     };
-  }, [emailState, passwordState]);
+  }, [emailIsValid, passwordIsValid]);
 
   const emailChangeHandler = (event) => {
     /* want to update the email -> so lets start here with the value, call dispatch Email,

@@ -118,19 +118,20 @@ const Login = (props) => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const identifier = setTimeout(() => {
-  //     console.log('Checking form validity!');
-  //     setFormIsValid(
-  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      console.log("Checking form validity!");
+      /* this below that we've altered would be a fine way pf calling setFormIsValid, because since 
+      its now of an effect we still refer to our state snapshots, but this effect is guaranteed to rerun
+      whenever these states change, ultimately it will run with latest state values. */
+      setFormIsValid(emailState.isValid && passwordState.isValid);
+    }, 500);
 
-  //   return () => {
-  //     console.log('CLEANUP');
-  //     clearTimeout(identifier);
-  //   };
-  // }, [enteredEmail, enteredPassword]);
+    return () => {
+      console.log("CLEANUP");
+      clearTimeout(identifier);
+    };
+  }, [emailState, passwordState]);
 
   const emailChangeHandler = (event) => {
     /* want to update the email -> so lets start here with the value, call dispatch Email,
@@ -145,7 +146,7 @@ const Login = (props) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
     /* now we just need to update the code accordingly */
-    setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
+    // setFormIsValid(event.target.value.includes("@") && passwordState.isValid);
   };
 
   const passwordChangeHandler = (event) => {

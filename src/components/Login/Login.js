@@ -35,8 +35,12 @@ component function -> does need to interact with anything defined inside of the 
 function when its executed by React, automatically */
 /* reducer function recieves two arguments, our last state snapshot and the action that was dispatched. */
 const emailReducer = (state, action) => {
-  /* should return a new state */
-  return { value: "", isValid: false };
+  /* Now can handle action with an if statement. Check if action.type is equal to user input */
+  /* Keep in mind, what I dispatched as an action will be an object, because thats what we set it to in 
+  the dispatchEmail function. */
+  if (action.type === "USER_INPUT")
+    /* should return a new state */
+    return { value: "", isValid: false };
 };
 
 const Login = (props) => {
@@ -96,7 +100,7 @@ const Login = (props) => {
     save what the user entered, it would make sense to add some payload -> i.e. a val field -> holds
     event target value. */
     /* So now entire object is our action -> its a type field that describes what happened and extra
-    payload in this case. */
+    payload, in this case the value users entered. */
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
 
     setFormIsValid(

@@ -11,6 +11,11 @@ an object that also contains components. AuthContext itself is not a component, 
 that will contain a component. */
 const AuthContext = React.createContext({
   isLoggedIn: false,
+  /* good idea to add your functions like onLogout in my case to the default context when you 
+  create a context -> store a dummy function. This is good for IDE auto-completion. */
+  /* Why? IDE is looking at this default context object -> find out what you are able to access on your 
+  context */
+  onLogout: () => {},
 });
 
 /* We don't need this object here though, instead we'll need it in other components, so I'll 

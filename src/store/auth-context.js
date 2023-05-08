@@ -1,4 +1,6 @@
-import React from "react";
+/* with const AuthContextProvider below, can actually import useState here inside of the 
+auth-context.js file. */
+import React, { useState } from "react";
 
 /* On react, going to call createContext -> which creates a Context object */
 /* createContext takes a default context and Context here is just your App or component 
@@ -18,9 +20,14 @@ const AuthContext = React.createContext({
   onLogout: () => {},
 });
 
-/* We don't need this object here though, instead we'll need it in other components, so I'll 
-export it as a default to make it available in other files. */
+/* we are exporting AuthContextProvider component in addition to the default as a named export */
+export const AuthContextProvider = (props) => {
+  return <AuthContext.Provider>{props.children}</AuthContext.Provider>;
+};
+
 export default AuthContext;
+
+//NOTES ABOUT auth-context
 
 /* So now we can import this specific Context object. Then use Context in your app, I
 need to do two things. 

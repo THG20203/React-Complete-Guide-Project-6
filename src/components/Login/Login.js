@@ -34,7 +34,10 @@ component function -> does need to interact with anything defined inside of the 
 /* All the data which will be required and used inside of the reducer function will be passed into this
 function when its executed by React, automatically */
 /* reducer function recieves two arguments, our last state snapshot and the action that was dispatched. */
-const emailReducer = (state, action) => {};
+const emailReducer = (state, action) => {
+  /* should return a new state */
+  return { value: "", isValid: false };
+};
 
 const Login = (props) => {
   /* could use useReducer() to combine our entered values and validities for the email and the password. 
@@ -51,7 +54,15 @@ const Login = (props) => {
   dispatchEmail (our dispatch function). These two names are up to me. */
   /* Then I mentioned that useReducer as a first argument takes a function. Using outsourced name 
   function (written above). emailReducer function now pointed at from above. */
-  const [emailState, dispatchEmail] = useReducer(emailReducer);
+  const [emailState, dispatchEmail] = useReducer(
+    emailReducer,
+    /* Initial state we set below for our emailState snapshot. So emailState therefore is what we can 
+    now use in our code. */
+    {
+      value: "",
+      isValid: false,
+    }
+  );
 
   useEffect(() => {
     console.log("EFFECT RUNNING");
@@ -87,12 +98,14 @@ const Login = (props) => {
     setEnteredPassword(event.target.value);
 
     setFormIsValid(
-      enteredEmail.includes("@") && event.target.value.trim().length > 6
+      /* Can use emailState here where I want the enteredEmail -> now can just 
+      check if emailState isValid is true */
+      emailState.isValid && event.target.value.trim().length > 6
     );
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes("@"));
+    setEmailIsValid(emailState.isValid);
   };
 
   const validatePasswordHandler = () => {
@@ -101,6 +114,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+    /* scrolling down to submit handler -> here we want to forward the value -> emailState.value */
     props.onLogin(enteredEmail, enteredPassword);
   };
 

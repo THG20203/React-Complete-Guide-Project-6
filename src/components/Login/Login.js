@@ -18,11 +18,12 @@ dispatchFun()) - it recieves the latest state snapshot and should return the new
 initial state is a bit more complex. A function to set the initial state programmatically. And for example,
 the result of lets say HTTP requests */
 
-import React, { useState, useEffect, useReducer } from "react";
+import React, { useState, useEffect, useReducer, useContext } from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
+import AuthContext from "../../store/auth-context";
 
 /* arrow function stored in this emailReducer const for the useReducer() function below. Please 
 note -> reducer function created outside of the component function. Did so, because inside of this 
@@ -110,6 +111,9 @@ const Login = (props) => {
     isValid: null,
   });
 
+  /* set up our AuthContext */
+  const authCtx = useContext(AuthContext);
+
   useEffect(() => {
     console.log("EFFECT RUNNING");
 
@@ -192,7 +196,7 @@ const Login = (props) => {
   const submitHandler = (event) => {
     event.preventDefault();
     /* scrolling down to submit handler -> here we want to forward the value -> emailState.value */
-    props.onLogin(emailState.value, passwordState.value);
+    authCtx.onLogin(emailState.value, passwordState.value);
   };
 
   return (

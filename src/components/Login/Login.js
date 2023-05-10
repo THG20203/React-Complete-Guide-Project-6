@@ -204,22 +204,6 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
-            /* instead of emailIsValid, we have emailState is valid */
-            emailState.isValid === false ? classes.invalid : ""
-          }`}
-        >
-          <label htmlFor="email">E-Mail</label>
-          <input
-            type="email"
-            id="email"
-            /* below, where I pass the value back into the input, we can have emailState.value */
-            value={emailState.value}
-            onChange={emailChangeHandler}
-            onBlur={validateEmailHandler}
-          />
-        </div>
-        <div
-          className={`${classes.control} ${
             passwordState.isValid === false ? classes.invalid : ""
           }`}
         >

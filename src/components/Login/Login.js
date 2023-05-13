@@ -18,7 +18,13 @@ dispatchFun()) - it recieves the latest state snapshot and should return the new
 initial state is a bit more complex. A function to set the initial state programmatically. And for example,
 the result of lets say HTTP requests */
 
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useContext,
+  useRef,
+} from "react";
 
 import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
@@ -115,6 +121,9 @@ const Login = (props) => {
   /* set up our AuthContext */
   const authCtx = useContext(AuthContext);
 
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+
   useEffect(() => {
     console.log("EFFECT RUNNING");
 
@@ -203,6 +212,7 @@ const Login = (props) => {
       here. We're going to change it in an else if statement -> check if form is valid because the email 
       is not valid, */
     } else if (!emailIsValid) {
+      emailInputRef.activate();
     } else {
     }
   };
@@ -212,6 +222,7 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         {/* Using Input component where previously had that code - 1st for email */}
         <Input
+          ref={emailInputRef}
           id="email"
           label="E-mail"
           type="email"
@@ -222,6 +233,7 @@ const Login = (props) => {
         />
         {/* Using Input component where previously had that code - 2nd for password */}
         <Input
+          ref={passwordInputRef}
           id="password"
           label="Password"
           type="password"

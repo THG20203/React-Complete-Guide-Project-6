@@ -196,8 +196,15 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    /* scrolling down to submit handler -> here we want to forward the value -> emailState.value */
-    authCtx.onLogin(emailState.value, passwordState.value);
+    if (formIsValid) {
+      /* scrolling down to submit handler -> here we want to forward the value -> emailState.value */
+      authCtx.onLogin(emailState.value, passwordState.value);
+      /* Otherwise, I want to focus the first invalid Input I find. I.e. put the cursor in the email 
+      here. We're going to change it in an else if statement -> check if form is valid because the email 
+      is not valid, */
+    } else if (!emailIsValid) {
+    } else {
+    }
   };
 
   return (
@@ -224,7 +231,7 @@ const Login = (props) => {
           onBlur={validatePasswordHandler}
         />
         <div className={classes.actions}>
-          <Button type="submit" className={classes.btn} disabled={!formIsValid}>
+          <Button type="submit" className={classes.btn}>
             Login
           </Button>
         </div>

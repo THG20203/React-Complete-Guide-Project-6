@@ -212,8 +212,9 @@ const Login = (props) => {
       here. We're going to change it in an else if statement -> check if form is valid because the email 
       is not valid, */
     } else if (!emailIsValid) {
-      emailInputRef.activate();
+      emailInputRef.current.activate();
     } else {
+      passwordInputRef.current.activate();
     }
   };
 
